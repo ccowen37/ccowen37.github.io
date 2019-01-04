@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>Connor Owen</title>
-    
+<title>Goal Programming</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121670259-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'UA-121670259-1');
 </script>
-    
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
-
     /*!
 *
 * Twitter Bootstrap
@@ -153,87 +151,1344 @@ div#notebook {
 }
 </style>
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Custom stylesheet, it must be in the same directory as the html file -->
 <link rel="stylesheet" href="styles.css">
 <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 <body>
 
-	<div id='cssmenu'>
-		<ul>
-			<li><a href='#'><span>Home</span></a></li>
-			<li><a href='#Optimization'><span>Optimization</span></a></li>
-			<li><a href='#Simulation'><span>Simulation</span></a></li>
-			<li class='last'><a href='./contact.html'><span>Contact</span></a></li>
-		</ul>
-	</div>
-	<!-- Loading mathjax macro -->
-	<!-- Load mathjax -->
-	<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-	<!-- MathJax configuration -->
-	<script type="text/x-mathjax-config">
-		MathJax.Hub.Config({
-		tex2jax: {
-		inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-		displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-		processEscapes: true,
-		processEnvironments: true
-	},
-	// Center justify equations in code and markdown cells. Elsewhere
-	// we use CSS to left justify single line equations in code cells.
-	displayAlign: 'center',
-	"HTML-CSS": {
-	styles: {'.MathJax_Display': {"margin": 0}},
-	linebreaks: { automatic: true }
-}
-});
-</script>
-<!-- End of mathjax configuration --></head>
+<div id='cssmenu'>
+<ul>
+   <li><a href='./index.html'><span>Home</span></a></li>
+   <li><a href='./index.html#Integer-Programming-&amp;-Combinatorial-Optimization'><span>Optimization</span></a></li>
+   <li><a href='./index.html#Simulation'><span>Simulation</span></a></li>
+   <li class='last'><a href='./contact.html'><span>Contact</span></a></li>
+</ul>
+</div>
 
-<div tabindex="-1" id="notebook" class="border-box-sizing">
-	<div class="container" id="notebook-container">
+<!-- Loading mathjax macro -->
+<!-- Load mathjax -->
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    <!-- MathJax configuration -->
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    <!-- End of mathjax configuration --></head>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
 
-		<div class="cell border-box-sizing text_cell rendered">
-			<div class="prompt input_prompt">
-			</div>
-			<div class="inner_cell">
-				<div class="text_cell_render border-box-sizing rendered_html">
-					<h1 id="Operations-Research-with-Python">Operations Research with Python<a class="anchor-link" href="#Operations-Research-with-Python">&#182;</a></h1><h2 id="Notes-on-Classic-&amp;-Modern-OR">Notes on Classic &amp; Modern OR<a class="anchor-link" href="#Notes-on-Classic-&amp;-Modern-OR">&#182;</a></h2>
-				</div>
-			</div>
-		</div>
-		<div class="cell border-box-sizing text_cell rendered">
-			<div class="prompt input_prompt">
-			</div>
-			<div class="inner_cell">
-				<div class="text_cell_render border-box-sizing rendered_html">
-					<p>I am an operations research enthusiast who is also a fan of the open-source community. While OR (especially optimization) is not as accessible as typical data science techniques from an open-source perspective, I wanted to explore classic and modern OR problems using Python. I like to show how you can combine problem modeling with other approachable Python topics like data visualization, and API calls.</p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Goal-Programming-for-Optimization">Goal Programming for Optimization<a class="anchor-link" href="#Goal-Programming-for-Optimization">&#182;</a></h1><p>
+<b>Connor Owen</b>
+<br>
+<a href="mailto:cowen33@gatech.edu">cowen33@gatech.edu</a>
+</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://en.wikipedia.org/wiki/Goal_programming">Goal programming</a> is a branch of optimization that deals with balancing multiple goals for a given problem. In many applications of optimization, it is common that a decision maker has to consider multiple, often conflicting, objectives. For example, a city planner might want to balance coverage and equity when deciding where to place a new amenity, or a plant might have a production goal they want to meet exactly, but can go over or under based on conflicting constraints. Goal programming provides a framework with which to formulate this type of problems.</p>
+<p>
+The general formulation of goal programming is define a goal, then define deviations from this goal, and finally minimize the deviation in some way. To explore this problem, we'll go over an example problem inspired by a real-life problem I was asked to solve.
+</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Mentor-Assignment-Problem">Mentor Assignment Problem<a class="anchor-link" href="#Mentor-Assignment-Problem">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The problem goes like this: there are m mentors, and n mentees, such that m &lt; n. The mentoring sessions happen in groups, so the mentors will each have multiple mentees. Each mentee beforehand lists the preference for their top 3 mentors. We want to come up with an assignment of mentees to mentors that balances individual choice with group size, since we want neither extremely large groups nor extremely small groups.</p>
+<p>
+These two objectives (as you'll see in the data) are conflicting, since if everyone were to get their first choice of mentor, the resulting groups would not be equally sized. So, let's start taking a look at the data.
+</p><p><b>Mentors</b>: Jack, Cindy, Simrun, Christopher, Edward</p>
+<p><b>Mentees</b>: Chiara, Rachel, Irving, Felipe, Tommy, Spencer, Terrell, Alex, Kristen, Elsa, Melody, Eduardo, Riley, Robin, Marcus, Clarke, Frankie, Sarah, David, Darin, Javier</p>
+<p>Below, we'll look at the preferences in a <a href="https://pandas.pydata.org/">pandas</a> table using Python. 1, 2, and 3 represent their top three choices (1 is their first choice), while a null represents no preference.</p>
 
-				</div>
-			</div>
-		</div>
-		<div class="cell border-box-sizing text_cell rendered">
-			<div class="prompt input_prompt">
-			</div>
-			<div class="inner_cell">
-				<div class="text_cell_render border-box-sizing rendered_html">
-				<h2 id="Optimization">Optimization<a class="anchor-link" href="#Optimization">&#182;</a></h2>
-				<h3 id="Linear-Programming">Linear Programming<a class="anchor-link" href="#Linear-Programming">&#182;</a></h3><p>
-					<li><a href="./Linear-Programming-Python.html">Linear Programming in Python (Blending Problem)</a></li>
-				</p><h3 id="Integer-and-Combinatorial-Optimization">Integer and Combinatorial Optimization<a class="anchor-link" href="#Integer-and-Combinatorial-Optimization">&#182;</a></h3><p>
-					<li><a href="./TSP-Heuristics.html">Exploring Traveling Salesman Heuristics</a></li>
-					<li><a href="./TSP-Formulation.html">Modeling Exact Formulations of the TSP</a></li>
-					<li><a href="./Goal_Programming.html">Goal Programming in an Integer Program</a></li>
-					<li><a href="./DiscretizingNonlinearFunctions.html">Discretizing Nonlinear Functions for Optimization</a></li>
-					<!-- <li><a href="">Binary Indexing Scheme for Discretization of a Nonlinear Function</a></li> -->
-				</p><h2 id="Simulation">Simulation<a class="anchor-link" href="#Simulation">&#182;</a></h2><p>
-					<li><a href="./KDE_Gaussian.html">Creating a Guassian Kernel Density Estimator</a></li>
-		</p>
-	</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="c1">#-Preference data: we&#39;ll read it into pandas using a dict object</span>
+
+<span class="n">mentors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Jack&#39;</span><span class="p">,</span> <span class="s1">&#39;Cindy&#39;</span><span class="p">,</span> <span class="s1">&#39;Simrun&#39;</span><span class="p">,</span> <span class="s1">&#39;Christopher&#39;</span><span class="p">,</span> <span class="s1">&#39;Edward&#39;</span><span class="p">]</span>
+<span class="n">mentees</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Chiara&#39;</span><span class="p">,</span> <span class="s1">&#39;Rachel&#39;</span><span class="p">,</span> <span class="s1">&#39;Irving&#39;</span><span class="p">,</span> <span class="s1">&#39;Felipe&#39;</span><span class="p">,</span> <span class="s1">&#39;Tommy&#39;</span><span class="p">,</span> <span class="s1">&#39;Spencer&#39;</span><span class="p">,</span> 
+           <span class="s1">&#39;Terrell&#39;</span><span class="p">,</span> <span class="s1">&#39;Alex&#39;</span><span class="p">,</span> <span class="s1">&#39;Kristen&#39;</span><span class="p">,</span> <span class="s1">&#39;Elsa&#39;</span><span class="p">,</span> <span class="s1">&#39;Melody&#39;</span><span class="p">,</span> 
+           <span class="s1">&#39;Eduardo&#39;</span><span class="p">,</span> <span class="s1">&#39;Riley&#39;</span><span class="p">,</span> <span class="s1">&#39;Robin&#39;</span><span class="p">,</span> <span class="s1">&#39;Marcus&#39;</span><span class="p">,</span> <span class="s1">&#39;Clarke&#39;</span><span class="p">,</span> 
+           <span class="s1">&#39;Frankie&#39;</span><span class="p">,</span> <span class="s1">&#39;Sarah&#39;</span><span class="p">,</span> <span class="s1">&#39;David&#39;</span><span class="p">,</span> <span class="s1">&#39;Darin&#39;</span><span class="p">,</span> <span class="s1">&#39;Javier&#39;</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">selectMentor</span><span class="p">(</span><span class="n">randNum</span><span class="p">):</span>
+    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">randNum</span> <span class="o">&lt;=</span> <span class="mf">0.5</span><span class="p">:</span>
+        <span class="n">mentor</span> <span class="o">=</span> <span class="s1">&#39;Jack&#39;</span>
+    <span class="k">elif</span> <span class="mf">0.5</span> <span class="o">&lt;</span> <span class="n">randNum</span> <span class="o">&lt;=</span> <span class="mf">0.6</span><span class="p">:</span>
+        <span class="n">mentor</span> <span class="o">=</span> <span class="s1">&#39;Cindy&#39;</span>
+    <span class="k">elif</span> <span class="mf">0.6</span> <span class="o">&lt;</span> <span class="n">randNum</span> <span class="o">&lt;=</span> <span class="mf">0.8</span><span class="p">:</span>
+        <span class="n">mentor</span> <span class="o">=</span> <span class="s1">&#39;Simrun&#39;</span>
+    <span class="k">elif</span> <span class="mf">0.8</span> <span class="o">&lt;</span> <span class="n">randNum</span> <span class="o">&lt;=</span> <span class="mf">0.9</span><span class="p">:</span>
+        <span class="n">mentor</span> <span class="o">=</span> <span class="s1">&#39;Christopher&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mentor</span> <span class="o">=</span> <span class="s1">&#39;Edward&#39;</span>   
+    <span class="k">return</span> <span class="n">mentor</span>
+
+<span class="k">def</span> <span class="nf">selectMentors</span><span class="p">():</span>
+    <span class="p">(</span><span class="n">mentor1</span><span class="p">,</span> <span class="n">mentor2</span><span class="p">,</span> <span class="n">mentor3</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">selectMentor</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()),</span> <span class="n">selectMentor</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()),</span> <span class="n">selectMentor</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()))</span>
+    <span class="k">while</span> <span class="n">mentor2</span> <span class="o">==</span> <span class="n">mentor1</span><span class="p">:</span>
+        <span class="n">mentor2</span> <span class="o">=</span> <span class="n">selectMentor</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+    <span class="k">while</span> <span class="n">mentor3</span> <span class="o">==</span> <span class="n">mentor1</span> <span class="ow">or</span> <span class="n">mentor3</span> <span class="o">==</span> <span class="n">mentor2</span><span class="p">:</span>
+        <span class="n">mentor3</span> <span class="o">=</span> <span class="n">selectMentor</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">mentor1</span><span class="p">,</span> <span class="n">mentor2</span><span class="p">,</span> <span class="n">mentor3</span><span class="p">]</span>
+        
+<span class="c1">#-we create the preferences using random choices from the lists above</span>
+<span class="c1">#preferences= {mentee: random.sample(mentors, 3) for mentee in mentees }</span>
+<span class="n">preferences</span><span class="o">=</span> <span class="p">{</span><span class="n">mentee</span><span class="p">:</span> <span class="n">selectMentors</span><span class="p">()</span> <span class="k">for</span> <span class="n">mentee</span> <span class="ow">in</span> <span class="n">mentees</span> <span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">countPreferences</span><span class="p">(</span><span class="n">preferences</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function goes through the mentee preferences, </span>
+<span class="sd">    and adds up how many times each mentor got ranked </span>
+<span class="sd">    as 1, 2 or 3.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mentorCounts</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">mentee</span> <span class="ow">in</span> <span class="n">preferences</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">mentorList</span> <span class="o">=</span> <span class="n">preferences</span><span class="p">[</span><span class="n">mentee</span><span class="p">]</span>
+            <span class="n">mentorCounts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">mentorCounts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">{</span><span class="n">mentor</span><span class="p">:</span><span class="mi">0</span> <span class="k">for</span> <span class="n">mentor</span> <span class="ow">in</span> <span class="n">mentors</span><span class="p">})</span>
+            <span class="n">mentorCounts</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">mentorList</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">mentorCounts</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">mentorList</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">mentorCounts</span>
+
+<span class="n">countPreferences</span><span class="p">(</span><span class="n">preferences</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[47]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{1: {&apos;Christopher&apos;: 2, &apos;Cindy&apos;: 0, &apos;Edward&apos;: 3, &apos;Jack&apos;: 11, &apos;Simrun&apos;: 5},
+ 2: {&apos;Christopher&apos;: 2, &apos;Cindy&apos;: 1, &apos;Edward&apos;: 4, &apos;Jack&apos;: 4, &apos;Simrun&apos;: 10},
+ 3: {&apos;Christopher&apos;: 5, &apos;Cindy&apos;: 7, &apos;Edward&apos;: 5, &apos;Jack&apos;: 2, &apos;Simrun&apos;: 2}}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">preferencesDataFrame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">preferences</span><span class="p">)</span>
+
+<span class="c1">#use to create HTML table of data frame</span>
+<span class="c1">#print(preferencesDataFrame.to_html()) </span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Alex</th>
+      <th>Chiara</th>
+      <th>Clarke</th>
+      <th>Darin</th>
+      <th>David</th>
+      <th>Eduardo</th>
+      <th>Elsa</th>
+      <th>Felipe</th>
+      <th>Frankie</th>
+      <th>Irving</th>
+      <th>Javier</th>
+      <th>Kristen</th>
+      <th>Marcus</th>
+      <th>Melody</th>
+      <th>Rachel</th>
+      <th>Riley</th>
+      <th>Robin</th>
+      <th>Sarah</th>
+      <th>Spencer</th>
+      <th>Terrell</th>
+      <th>Tommy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Edward</td>
+      <td>Simrun</td>
+      <td>Simrun</td>
+      <td>Cindy</td>
+      <td>Christopher</td>
+      <td>Simrun</td>
+      <td>Jack</td>
+      <td>Jack</td>
+      <td>Simrun</td>
+      <td>Edward</td>
+      <td>Jack</td>
+      <td>Christopher</td>
+      <td>Cindy</td>
+      <td>Christopher</td>
+      <td>Simrun</td>
+      <td>Jack</td>
+      <td>Jack</td>
+      <td>Edward</td>
+      <td>Jack</td>
+      <td>Christopher</td>
+      <td>Christopher</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Simrun</td>
+      <td>Cindy</td>
+      <td>Jack</td>
+      <td>Simrun</td>
+      <td>Edward</td>
+      <td>Jack</td>
+      <td>Christopher</td>
+      <td>Christopher</td>
+      <td>Cindy</td>
+      <td>Jack</td>
+      <td>Christopher</td>
+      <td>Jack</td>
+      <td>Jack</td>
+      <td>Jack</td>
+      <td>Christopher</td>
+      <td>Simrun</td>
+      <td>Simrun</td>
+      <td>Jack</td>
+      <td>Cindy</td>
+      <td>Simrun</td>
+      <td>Jack</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Cindy</td>
+      <td>Jack</td>
+      <td>Christopher</td>
+      <td>Jack</td>
+      <td>Simrun</td>
+      <td>Christopher</td>
+      <td>Cindy</td>
+      <td>Simrun</td>
+      <td>Jack</td>
+      <td>Simrun</td>
+      <td>Simrun</td>
+      <td>Simrun</td>
+      <td>Simrun</td>
+      <td>Simrun</td>
+      <td>Jack</td>
+      <td>Christopher</td>
+      <td>Christopher</td>
+      <td>Simrun</td>
+      <td>Christopher</td>
+      <td>Jack</td>
+      <td>Cindy</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">preferences</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[49]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&apos;Alex&apos;: [&apos;Edward&apos;, &apos;Simrun&apos;, &apos;Christopher&apos;],
+ &apos;Chiara&apos;: [&apos;Jack&apos;, &apos;Christopher&apos;, &apos;Simrun&apos;],
+ &apos;Clarke&apos;: [&apos;Simrun&apos;, &apos;Cindy&apos;, &apos;Edward&apos;],
+ &apos;Darin&apos;: [&apos;Jack&apos;, &apos;Simrun&apos;, &apos;Christopher&apos;],
+ &apos;David&apos;: [&apos;Jack&apos;, &apos;Simrun&apos;, &apos;Christopher&apos;],
+ &apos;Eduardo&apos;: [&apos;Jack&apos;, &apos;Edward&apos;, &apos;Cindy&apos;],
+ &apos;Elsa&apos;: [&apos;Jack&apos;, &apos;Edward&apos;, &apos;Cindy&apos;],
+ &apos;Felipe&apos;: [&apos;Jack&apos;, &apos;Simrun&apos;, &apos;Christopher&apos;],
+ &apos;Frankie&apos;: [&apos;Simrun&apos;, &apos;Jack&apos;, &apos;Edward&apos;],
+ &apos;Irving&apos;: [&apos;Jack&apos;, &apos;Simrun&apos;, &apos;Cindy&apos;],
+ &apos;Javier&apos;: [&apos;Christopher&apos;, &apos;Simrun&apos;, &apos;Cindy&apos;],
+ &apos;Kristen&apos;: [&apos;Christopher&apos;, &apos;Jack&apos;, &apos;Simrun&apos;],
+ &apos;Marcus&apos;: [&apos;Edward&apos;, &apos;Christopher&apos;, &apos;Jack&apos;],
+ &apos;Melody&apos;: [&apos;Edward&apos;, &apos;Simrun&apos;, &apos;Jack&apos;],
+ &apos;Rachel&apos;: [&apos;Jack&apos;, &apos;Edward&apos;, &apos;Cindy&apos;],
+ &apos;Riley&apos;: [&apos;Jack&apos;, &apos;Simrun&apos;, &apos;Edward&apos;],
+ &apos;Robin&apos;: [&apos;Jack&apos;, &apos;Simrun&apos;, &apos;Cindy&apos;],
+ &apos;Sarah&apos;: [&apos;Jack&apos;, &apos;Simrun&apos;, &apos;Christopher&apos;],
+ &apos;Spencer&apos;: [&apos;Simrun&apos;, &apos;Jack&apos;, &apos;Edward&apos;],
+ &apos;Terrell&apos;: [&apos;Simrun&apos;, &apos;Jack&apos;, &apos;Edward&apos;],
+ &apos;Tommy&apos;: [&apos;Simrun&apos;, &apos;Edward&apos;, &apos;Cindy&apos;]}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One possible formulation we can do to match mentees to mentors is to assign costs 1, 2, and 3 to their first, second, and third choices, respectively, and minimize the sum of the assignment. Without any restriction, everyone will naturally get their first choice (since there are no group size limits).</p>
+<p>Let's take a look at what the assignment is like with no group balancing.</p>
+<p>Our formulation will be fairly simple: we create arcs between mentees and mentors to make a complete bipartite graph. Each arc will be given a binary variable, where 1 represents an assignment, and 0 represents no assignment.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Sets">Sets<a class="anchor-link" href="#Sets">&#182;</a></h3><p>$\mathcal{N}$: set of mentees, indexed by n</p>
+<p>$\mathcal{M}$: set of mentors, indexed by m</p>
+<h3 id="Parameters">Parameters<a class="anchor-link" href="#Parameters">&#182;</a></h3><p>$\mathrm{p_{n,m}}$ preference mentee n has for mentor m, 1 represents most preferred</p>
+<h3 id="Decision-Variables">Decision Variables<a class="anchor-link" href="#Decision-Variables">&#182;</a></h3><p>$a_{n,m}$: arc variable between mentee n and mentor m</p>
+<h3 id="Formulation">Formulation<a class="anchor-link" href="#Formulation">&#182;</a></h3><p>$\min{\; \sum_{m \in \mathcal{M}}\sum_{n \in \mathcal{N}}a_{n,m}\mathrm{p_{n,m}}} $</p>
+<p>$\sum_{m \in \mathcal{M}}{a_{n,m}} = 1 \; \forall n \in \mathcal{N} \;\;\; (1)$</p>
+<p>$\sum_{n \in \mathcal{N}}{a_{n,m}} \geq 1 \; \forall m \in \mathcal{M} \;\;\; (2)$</p>
+<p>$ a_{n,m} \in \{0,1\} \; \forall n \in \mathcal{N}, \; \forall m \in \mathcal{M}$</p>
+<p>The objective function above minimizes the cost of assignment, where the cost represents the preference mentee n has for mentor m. A low preference is better, and we can define a "no preference" to be a large number so as to avoid assignment. Constraint 1 ensures that each mentee is assigned to exactly 1 mentor, and constraint 2 ensures that each mentor gets at least 1 mentee.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pulp</span>
+
+
+<span class="k">def</span> <span class="nf">groupOptimization</span><span class="p">(</span><span class="n">preferences</span><span class="p">):</span>
+    
+    <span class="n">prob</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpProblem</span><span class="p">(</span><span class="s2">&quot;No Restrictions Mentoring&quot;</span><span class="p">,</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpMinimize</span><span class="p">)</span>
+    
+    <span class="n">arcs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)</span> <span class="k">for</span> <span class="n">mentee</span> <span class="ow">in</span> <span class="n">mentees</span> <span class="k">for</span> <span class="n">mentor</span> <span class="ow">in</span> <span class="n">mentors</span><span class="p">]</span>
+    <span class="n">arc_variables</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpVariable</span><span class="o">.</span><span class="n">dicts</span><span class="p">(</span><span class="s2">&quot;Arcs&quot;</span><span class="p">,</span> 
+                                   <span class="p">[(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)</span> <span class="k">for</span> <span class="n">mentee</span> <span class="ow">in</span> <span class="n">mentees</span> \
+                                                    <span class="k">for</span> <span class="n">mentor</span> <span class="ow">in</span> <span class="n">mentors</span><span class="p">],</span> \
+                                  <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpBinary</span><span class="p">)</span>
+    
+    
+    <span class="k">def</span> <span class="nf">mentorPreferences</span><span class="p">(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">):</span>
+        <span class="c1">#if mentor in preferences then return position in list</span>
+        <span class="k">if</span> <span class="n">mentor</span> <span class="ow">in</span> <span class="n">preferences</span><span class="p">[</span><span class="n">mentee</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">preferences</span><span class="p">[</span><span class="n">mentee</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">mentor</span><span class="p">)</span>
+        <span class="c1">#if mentor not in preferences return large number</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">10</span>
+    
+    <span class="n">prob</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">mentorPreferences</span><span class="p">(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)</span><span class="o">*</span><span class="n">arc_variables</span><span class="p">[(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)]</span> <span class="k">for</span> <span class="p">(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)</span> <span class="ow">in</span> <span class="n">arcs</span> <span class="p">)</span>
+    
+    <span class="c1">#Every mentee is assigned to 1 mentor</span>
+    <span class="k">for</span> <span class="n">mentee</span> <span class="ow">in</span> <span class="n">mentees</span><span class="p">:</span>
+        <span class="n">prob</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">arc_variables</span><span class="p">[(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)]</span> <span class="k">for</span> <span class="n">mentor</span> <span class="ow">in</span> <span class="n">mentors</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+
+    <span class="c1">#Every mentor is assigned at least one individual</span>
+    <span class="k">for</span> <span class="n">mentor</span> <span class="ow">in</span> <span class="n">mentors</span><span class="p">:</span> 
+        <span class="n">prob</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">arc_variables</span><span class="p">[(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)]</span> <span class="k">for</span> <span class="n">mentee</span> <span class="ow">in</span> <span class="n">mentees</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span>
+
+    <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+    
+    <span class="n">sol</span> <span class="o">=</span> <span class="p">{}</span>    
+    <span class="k">for</span> <span class="n">mentee</span> <span class="ow">in</span> <span class="n">mentees</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">mentor</span> <span class="ow">in</span> <span class="n">mentors</span><span class="p">:</span> 
+            <span class="k">if</span> <span class="n">arc_variables</span><span class="p">[(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)]</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">sol</span><span class="p">[</span><span class="n">mentee</span><span class="p">]</span> <span class="o">=</span> <span class="n">mentor</span>
+                    
+    <span class="k">return</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Before we get to creating some visualizations of the optimal solution, we can simply print out the assignment, as well as the preference the mentee had for that assignment. In this case, we see that everyone but Clarke received their preferred mentor. This means that the only reason she received Cindy as a mentor was because of the constraint ensuring that each mentor received at least 1 mentee.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[108]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sol1</span> <span class="o">=</span> <span class="n">groupOptimization</span><span class="p">(</span><span class="n">preferences</span><span class="p">)</span>
+<span class="c1">#prepare dictionary for counting preferences</span>
+<span class="n">countDict1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+<span class="n">groupSizeDict1</span> <span class="o">=</span> <span class="p">{</span><span class="n">mentor</span><span class="p">:</span><span class="mi">0</span> <span class="k">for</span> <span class="n">mentor</span> <span class="ow">in</span> <span class="n">mentors</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">mentee</span> <span class="ow">in</span> <span class="n">sol1</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="c1">#print out assignments with preferences</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">mentee</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sol1</span><span class="p">[</span><span class="n">mentee</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">preferences</span><span class="p">[</span><span class="n">mentee</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">sol1</span><span class="p">[</span><span class="n">mentee</span><span class="p">]))</span>
+    <span class="n">countDict1</span><span class="p">[</span><span class="n">preferences</span><span class="p">[</span><span class="n">mentee</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">sol1</span><span class="p">[</span><span class="n">mentee</span><span class="p">])]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">groupSizeDict1</span><span class="p">[</span><span class="n">sol1</span><span class="p">[</span><span class="n">mentee</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Chiara 	 Jack 	 0
+Rachel 	 Jack 	 0
+Irving 	 Jack 	 0
+Felipe 	 Jack 	 0
+Tommy 	 Simrun 	 0
+Spencer 	 Simrun 	 0
+Terrell 	 Simrun 	 0
+Alex 	 Edward 	 0
+Kristen 	 Christopher 	 0
+Elsa 	 Jack 	 0
+Melody 	 Edward 	 0
+Eduardo 	 Jack 	 0
+Riley 	 Jack 	 0
+Robin 	 Jack 	 0
+Marcus 	 Edward 	 0
+Clarke 	 Cindy 	 1
+Frankie 	 Simrun 	 0
+Sarah 	 Jack 	 0
+David 	 Jack 	 0
+Darin 	 Jack 	 0
+Javier 	 Christopher 	 0
+</pre>
 </div>
 </div>
 
 </div>
 </div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Assignment-Visualization">Assignment Visualization<a class="anchor-link" href="#Assignment-Visualization">&#182;</a></h3><p>No we can create some quick charts showing the distribution of assignments and group sizes. Since the data is straightforward to visualize, I choose a simple matplotlib bar chart with a basic color scheme. We wrap up the visualization in a function so that we can use it later.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">barChartCount</span><span class="p">(</span><span class="n">dictionary</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">height</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">height</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[130]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">cm</span>
+
+<span class="c1">#Function taken from Gareth on CodeGolf</span>
+<span class="c1">#https://codegolf.stackexchange.com/questions/4707/outputting-ordinal-numbers-1st-2nd-3rd#answer-4712</span>
+<span class="n">ordinal</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">%d%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="s2">&quot;tsnrhtdd&quot;</span><span class="p">[(</span><span class="n">n</span><span class="o">/</span><span class="mi">10</span><span class="o">%</span><span class="k">10</span>!=1)*(n%10&lt;4)*n%10::4])
+
+
+<span class="n">x</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">barChartCount</span><span class="p">(</span><span class="n">countDict1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s1">&#39;maroon&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Count of Mentees by Preference Assigned&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Mentee count&quot;</span><span class="p">)</span>
+<span class="c1">#Add 1 to list of preferences to make 0 the 1&#39;st choice</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">ordinal</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; choice&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">x2</span><span class="p">,</span> <span class="n">height2</span> <span class="o">=</span> <span class="n">barChartCount</span><span class="p">(</span><span class="n">groupSizeDict1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x2</span><span class="p">))),</span> <span class="n">height2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Group Size For Each mentor&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Mentee count&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x2</span><span class="p">))),</span> <span class="n">x2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1">##</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Goal-Programming-Assignment">Goal Programming Assignment<a class="anchor-link" href="#Goal-Programming-Assignment">&#182;</a></h2><p>
+While in the last model, nearly every mentee got their preferred mentor, we also see that the group sizes are not equitably distributed. For instance, Jack might not be able to give much attention to his many mentees, while Cindy has the capacity to take on more mentors. This is where goal programming comes in: we can add this trade-off between preferences and group size into the model to be able to evaluate solutions that balance both. 
+</p>
+<p>
+Below, we go over the additional parameters, variables and constraints that we need to add to the model. The main idea is that we define an "ideal" or equitable group size, and then define decision variables that are defined to be deviations from this ideal group size. Then, we add a weighted sum of these deviations to the objective function and minimize it.
+</p><h3 id="Additional-Parameters">Additional Parameters<a class="anchor-link" href="#Additional-Parameters">&#182;</a></h3><p>$G$: ideal average group size, defined as $\frac{|\mathcal{N}|}{|\mathcal{M}|}$</p>
+<p>$\pi$: weight for the deviations to be used in the objective function</p>
+<h3 id="Additional-Decision-Variables">Additional Decision Variables<a class="anchor-link" href="#Additional-Decision-Variables">&#182;</a></h3><p>$\delta^+_{m}$: positive deviation from average group size for mentor m</p>
+<p>$\delta^-_{m}$: negative deviation from average group size for mentor m</p>
+<h3 id="Additional-Constraints">Additional Constraints<a class="anchor-link" href="#Additional-Constraints">&#182;</a></h3><p>$ \delta^+_{m} - \delta^-_{m} = \sum_{n \in \mathcal{M}}{a_{n,m}} - G \;\; \forall m \in \mathcal{M}$</p>
+<h3 id="New-Objective-Function">New Objective Function<a class="anchor-link" href="#New-Objective-Function">&#182;</a></h3><p>$\min{\; \sum_{m \in \mathcal{M}}\sum_{n \in \mathcal{N}}a_{n,m}\mathrm{p_{n,m}} + \pi \sum_{m \in \mathcal{M}}({\delta^+_{m} + \delta^-_{m}}) } $</p>
+<p>The additional decision variables are used to quantify the deviations that each mentor has from the average "ideal" group size. This ideal is the number of mentees divided by the number of mentors. While not necessarily an integer, it will still serve in the optimization model. The additional constraint defines the positive and negative deviations. The new objective function minimizes a weighted sum of the assigned preferences and the sum of deviations of the ideal group size.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[132]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pulp</span>
+
+
+<span class="k">def</span> <span class="nf">groupGoalOptimization</span><span class="p">(</span><span class="n">preferences</span><span class="p">):</span>
+    
+    <span class="n">prob</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpProblem</span><span class="p">(</span><span class="s2">&quot;No Restrictions Mentoring&quot;</span><span class="p">,</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpMinimize</span><span class="p">)</span>
+    
+    <span class="n">arcs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)</span> <span class="k">for</span> <span class="n">mentee</span> <span class="ow">in</span> <span class="n">mentees</span> <span class="k">for</span> <span class="n">mentor</span> <span class="ow">in</span> <span class="n">mentors</span><span class="p">]</span>
+    <span class="n">arc_variables</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpVariable</span><span class="o">.</span><span class="n">dicts</span><span class="p">(</span><span class="s2">&quot;Arcs&quot;</span><span class="p">,</span> 
+                                   <span class="p">[(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)</span> <span class="k">for</span> <span class="n">mentee</span> <span class="ow">in</span> <span class="n">mentees</span> \
+                                                    <span class="k">for</span> <span class="n">mentor</span> <span class="ow">in</span> <span class="n">mentors</span><span class="p">],</span> \
+                                  <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpBinary</span><span class="p">)</span>
+    
+    <span class="c1">#define the deviation variables</span>
+    <span class="n">devPos</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpVariable</span><span class="o">.</span><span class="n">dicts</span><span class="p">(</span><span class="s2">&quot;Dev_Pos&quot;</span><span class="p">,</span> <span class="n">mentors</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">mentees</span><span class="p">))</span>
+    <span class="n">devNeg</span> <span class="o">=</span> <span class="n">pulp</span><span class="o">.</span><span class="n">LpVariable</span><span class="o">.</span><span class="n">dicts</span><span class="p">(</span><span class="s2">&quot;Dev_Neg&quot;</span><span class="p">,</span> <span class="n">mentors</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">mentees</span><span class="p">))</span>
+    
+    <span class="c1">#find the average size of a group if groups were equal size</span>
+    <span class="n">avg_group_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mentees</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">mentors</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">avg_group_size</span><span class="p">)</span>
+    
+    <span class="c1">#function to return preference for a given assignment</span>
+    <span class="k">def</span> <span class="nf">mentorPreferences</span><span class="p">(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">):</span>
+        <span class="c1">#if mentor in preferences then return position in list</span>
+        <span class="k">if</span> <span class="n">mentor</span> <span class="ow">in</span> <span class="n">preferences</span><span class="p">[</span><span class="n">mentee</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">preferences</span><span class="p">[</span><span class="n">mentee</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">mentor</span><span class="p">)</span>
+        <span class="c1">#if mentor not in preferences return large number</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1">#return 10 to make difficult for a no preference</span>
+            <span class="k">return</span> <span class="mi">10</span>
+    
+    <span class="c1">#the weight used in the objective function for the deviations</span>
+    <span class="n">devWeight</span> <span class="o">=</span> <span class="mi">5</span>
+    
+    <span class="n">prob</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">mentorPreferences</span><span class="p">(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)</span><span class="o">*</span><span class="n">arc_variables</span><span class="p">[(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)]</span> <span class="k">for</span> <span class="p">(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)</span> <span class="ow">in</span> <span class="n">arcs</span><span class="p">)</span> \
+               <span class="o">+</span> <span class="n">devWeight</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">devPos</span><span class="p">[</span><span class="n">mentor</span><span class="p">]</span> <span class="o">+</span> <span class="n">devNeg</span><span class="p">[</span><span class="n">mentor</span><span class="p">]</span> <span class="k">for</span> <span class="n">mentor</span> <span class="ow">in</span> <span class="n">mentors</span><span class="p">)</span>
+    
+    <span class="c1">#Every mentee is assigned to 1 mentor</span>
+    <span class="k">for</span> <span class="n">mentee</span> <span class="ow">in</span> <span class="n">mentees</span><span class="p">:</span>
+        <span class="n">prob</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">arc_variables</span><span class="p">[(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)]</span> <span class="k">for</span> <span class="n">mentor</span> <span class="ow">in</span> <span class="n">mentors</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+        
+    <span class="c1">#Every mentor is assigned at least one individual</span>
+    <span class="k">for</span> <span class="n">mentor</span> <span class="ow">in</span> <span class="n">mentors</span><span class="p">:</span> 
+        <span class="n">prob</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">arc_variables</span><span class="p">[(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)]</span> <span class="k">for</span> <span class="n">mentee</span> <span class="ow">in</span> <span class="n">mentees</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span>
+        
+        <span class="n">prob</span> <span class="o">+=</span> <span class="n">devPos</span><span class="p">[</span><span class="n">mentor</span><span class="p">]</span> <span class="o">-</span> <span class="n">devNeg</span><span class="p">[</span><span class="n">mentor</span><span class="p">]</span> <span class="o">==</span> <span class="nb">sum</span><span class="p">(</span><span class="n">arc_variables</span><span class="p">[(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)]</span> <span class="k">for</span> <span class="n">mentee</span> <span class="ow">in</span> <span class="n">mentees</span><span class="p">)</span> \
+                                                       <span class="o">-</span> <span class="n">avg_group_size</span>
+                                                    
+
+    <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+    
+    <span class="c1">#collect the assignment in a dictionary</span>
+    <span class="c1">#key is mentee, value is assigned mentor</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="p">{}</span>    
+    <span class="k">for</span> <span class="n">mentee</span> <span class="ow">in</span> <span class="n">mentees</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">mentor</span> <span class="ow">in</span> <span class="n">mentors</span><span class="p">:</span> 
+            <span class="k">if</span> <span class="n">arc_variables</span><span class="p">[(</span><span class="n">mentee</span><span class="p">,</span> <span class="n">mentor</span><span class="p">)]</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">sol</span><span class="p">[</span><span class="n">mentee</span><span class="p">]</span> <span class="o">=</span> <span class="n">mentor</span>
+                    
+    <span class="k">return</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we will solve the problem, and write out the assignment that was stored in the "sol" dictionary. The optimization program will also write out the ideal group size, which in this case is 4.2. Note that while this is not a possible group size, it will serve the intended purpose for goal programming.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[133]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sol</span> <span class="o">=</span> <span class="n">groupGoalOptimization</span><span class="p">(</span><span class="n">preferences</span><span class="p">)</span>
+<span class="n">countDict</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+<span class="n">groupSize</span> <span class="o">=</span> <span class="p">{</span><span class="n">mentor</span><span class="p">:</span><span class="mi">0</span> <span class="k">for</span> <span class="n">mentor</span> <span class="ow">in</span> <span class="n">mentors</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">mentee</span> <span class="ow">in</span> <span class="n">sol</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">mentee</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sol</span><span class="p">[</span><span class="n">mentee</span><span class="p">],</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">preferences</span><span class="p">[</span><span class="n">mentee</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="n">mentee</span><span class="p">]))</span>
+    <span class="n">countDict</span><span class="p">[</span><span class="n">preferences</span><span class="p">[</span><span class="n">mentee</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="n">mentee</span><span class="p">])]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">groupSize</span><span class="p">[</span><span class="n">sol</span><span class="p">[</span><span class="n">mentee</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>4.2
+Chiara 	 Christopher 	 1
+Rachel 	 Cindy 	 2
+Irving 	 Cindy 	 2
+Felipe 	 Jack 	 0
+Tommy 	 Simrun 	 0
+Spencer 	 Simrun 	 0
+Terrell 	 Simrun 	 0
+Alex 	 Edward 	 0
+Kristen 	 Christopher 	 0
+Elsa 	 Cindy 	 2
+Melody 	 Edward 	 0
+Eduardo 	 Edward 	 1
+Riley 	 Jack 	 0
+Robin 	 Jack 	 0
+Marcus 	 Edward 	 0
+Clarke 	 Cindy 	 1
+Frankie 	 Simrun 	 0
+Sarah 	 Jack 	 0
+David 	 Christopher 	 2
+Darin 	 Jack 	 0
+Javier 	 Christopher 	 0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Assignment-Visualization">Assignment Visualization<a class="anchor-link" href="#Assignment-Visualization">&#182;</a></h3><p>
+Now we can visualize the assignment in the simple bar charts that we defined earlier with a function. You can see the trade-off between preferences and group size in this chart. We note that the size of Jack's group has gone down, while Cindy's has gone up. While the group sizes are more equally distributed, there are now more individuals that did not get their first choice.
+</p><p>It's worthwile noting that as a decision maker, you would have the weight $\pi$ allows to be able to fine-tune that trade-off and create different scenarios, and ultimately select the best option that suits business needs.
+</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[134]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">cm</span>
+
+<span class="n">x1</span><span class="p">,</span> <span class="n">height1</span> <span class="o">=</span> <span class="n">barChartCount</span><span class="p">(</span><span class="n">countDict</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">height1</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s1">&#39;maroon&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Count of Mentees by Preference Assigned&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Mentee count&quot;</span><span class="p">)</span>
+<span class="c1">#Add 1 to list of preferences to make 0 the 1&#39;st choice</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">ordinal</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; choice&quot;</span><span class="p">,</span> <span class="n">x1</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">x2</span><span class="p">,</span> <span class="n">height2</span> <span class="o">=</span> <span class="n">barChartCount</span><span class="p">(</span><span class="n">groupSize</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x2</span><span class="p">))),</span> <span class="n">height2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Group Size For Each Mentor&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Mentee count&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x2</span><span class="p">))),</span> <span class="n">x2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+QGBmVnH/Hw4p8/158gGfAAAAAElFTkSuQmCC
+"
+>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+Zd9kAAAAAElFTkSuQmCC
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
 </body>
 </html>
